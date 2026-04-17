@@ -216,6 +216,34 @@
             margin-top: 0.3rem;
         }
 
+        .hero-resources {
+            position: relative;
+            z-index: 2;
+            margin-top: 2rem;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .whitepaper-link {
+            font-family: var(--mono);
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--yellow);
+            text-decoration: none;
+            padding: 0.4rem 0.9rem;
+            border: 1px solid rgba(232,200,64,0.5);
+            transition: all 0.2s;
+            display: inline-block;
+        }
+
+        .whitepaper-link:hover {
+            background: rgba(232,200,64,0.15);
+            text-shadow: 0 0 10px rgba(232,200,64,0.5);
+        }
+
         /* ââ INTRO ââ */
         .intro {
             max-width: 800px;
@@ -451,6 +479,18 @@
             text-shadow: 0 0 8px rgba(232,200,64,0.4);
         }
 
+        .dossier-link.x-link {
+            color: var(--amber);
+            border-color: rgba(255,179,71,0.4);
+            font-size: 0.6rem;
+            padding: 0.3rem 0.5rem;
+        }
+
+        .dossier-link.x-link:hover {
+            background: rgba(255,179,71,0.1);
+            text-shadow: 0 0 8px rgba(255,179,71,0.4);
+        }
+
         /* ââ CLASSIFIED STAMP ââ */
         .dossier .stamp {
             position: absolute;
@@ -462,6 +502,117 @@
             letter-spacing: 0.2em;
             text-transform: uppercase;
             pointer-events: none;
+        }
+
+        /* ââ VOTING SECTION ââ */
+        .voting-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .voting-card {
+            background: linear-gradient(135deg, #2a2a3e 0%, #1e1e30 100%);
+            border: 1px solid rgba(232,200,64,0.15);
+            border-left: 3px solid var(--red);
+            padding: 1.2rem;
+            text-align: center;
+            position: relative;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .voting-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(232,200,64,0.4);
+        }
+
+        .voting-card.voted {
+            border-color: rgba(51,255,51,0.5);
+        }
+
+        .voting-card h4 {
+            font-family: var(--typewriter);
+            font-size: 1rem;
+            color: var(--white);
+            margin-bottom: 0.8rem;
+            line-height: 1.4;
+        }
+
+        .vote-button {
+            font-family: var(--mono);
+            font-size: 0.6rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--white);
+            background: rgba(192,57,43,0.3);
+            border: 1px solid var(--red);
+            padding: 0.5rem 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            width: 100%;
+            margin-bottom: 0.8rem;
+        }
+
+        .vote-button:hover:not(:disabled) {
+            background: rgba(192,57,43,0.5);
+            color: var(--yellow);
+            text-shadow: 0 0 10px rgba(232,200,64,0.3);
+        }
+
+        .vote-button:disabled {
+            background: rgba(51,255,51,0.15);
+            border-color: rgba(51,255,51,0.5);
+            color: var(--green-text);
+            cursor: not-allowed;
+        }
+
+        .vote-count {
+            font-family: var(--pixel);
+            font-size: 1.1rem;
+            color: var(--yellow);
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 8px rgba(232,200,64,0.2);
+        }
+
+        .vote-percentage {
+            font-family: var(--mono);
+            font-size: 0.6rem;
+            color: var(--amber);
+            margin-bottom: 0.6rem;
+        }
+
+        .vote-bar-bg {
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(232,200,64,0.2);
+            height: 6px;
+            margin-bottom: 0.6rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .vote-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--red), var(--yellow));
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+
+        .vote-status {
+            font-family: var(--pixel);
+            font-size: 0.45rem;
+            color: var(--green-text);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-top: 0.6rem;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .vote-status.show {
+            opacity: 1;
         }
 
         /* ââ FOOTER ââ */
@@ -497,11 +648,52 @@
             text-shadow: 0 0 8px rgba(51,255,51,0.4);
         }
 
+        .footer-books {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px dashed rgba(232,200,64,0.1);
+        }
+
+        .footer-books-title {
+            font-family: var(--pixel);
+            font-size: 0.5rem;
+            color: var(--red);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .footer-books-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .book-link {
+            font-family: var(--mono);
+            font-size: 0.6rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--green-text);
+            text-decoration: none;
+            padding: 0.3rem 0.6rem;
+            border: 1px solid rgba(51,255,51,0.2);
+            transition: all 0.2s;
+        }
+
+        .book-link:hover {
+            background: rgba(51,255,51,0.1);
+            text-shadow: 0 0 8px rgba(51,255,51,0.4);
+        }
+
         /* ââ RESPONSIVE ââ */
         @media (max-width: 768px) {
             .nav-links { display: none; }
             .hero-stats { flex-direction: column; gap: 1.5rem; }
             .dossier-grid { grid-template-columns: 1fr; padding: 1rem; }
+            .voting-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+            .hero-resources { gap: 0.5rem; }
         }
     </style>
 </head>
@@ -515,6 +707,7 @@
         <li><a href="#notable">Notable Leads</a></li>
         <li><a href="#other">Other Suspects</a></li>
         <li><a href="#debunked">Debunked</a></li>
+        <li><a href="#vote">Vote</a></li>
     </ul>
 </nav>
 
@@ -542,6 +735,10 @@
             <div class="hero-stat-num">2011</div>
             <div class="hero-stat-label">Last Contact</div>
         </div>
+    </div>
+    <div class="hero-resources">
+        <a href="https://bitcoin.org/bitcoin.pdf" target="_blank" class="whitepaper-link">Whitepaper (Primary) &rarr;</a>
+        <a href="https://nakamotoinstitute.org/library/bitcoin/" target="_blank" class="whitepaper-link">Whitepaper (Archive) &rarr;</a>
     </div>
 </section>
 
@@ -603,6 +800,7 @@
                     <a href="https://techcrunch.com/2026/04/08/british-cryptographer-adam-back-denies-nyt-report-that-he-is-bitcoin-creator-satoshi-nakamoto/" target="_blank" class="dossier-link">TechCrunch: Back Denies &rarr;</a>
                     <a href="https://fortune.com/2026/04/08/who-is-the-real-inventor-of-bitcoin-satoshi-nakamoto/" target="_blank" class="dossier-link">Fortune: Analysis &rarr;</a>
                     <a href="https://www.theblock.co/post/396663/nyt-investigation-suggests-adam-back-may-be-satoshi-nakamoto" target="_blank" class="dossier-link">The Block &rarr;</a>
+                    <a href="https://x.com/adam3us" target="_blank" class="dossier-link x-link">[X] &rarr;</a>
                 </div>
             </div>
         </article>
@@ -640,6 +838,7 @@
                 <div class="dossier-links">
                     <a href="https://news.bitcoin.com/the-search-for-satoshi-nakamoto-a-look-at-7-suspected-bitcoin-creators/" target="_blank" class="dossier-link primary">Bitcoin News: 7 Suspects &rarr;</a>
                     <a href="https://www.ledger.com/academy/topics/crypto/who-is-satoshi-nakamoto" target="_blank" class="dossier-link">Ledger Academy &rarr;</a>
+                    <a href="https://x.com/halfin" target="_blank" class="dossier-link x-link">[X] &rarr;</a>
                 </div>
             </div>
         </article>
@@ -676,6 +875,7 @@
                 <div class="dossier-links">
                     <a href="https://trakx.io/resources/insights/what-is-the-identity-satoshi-nakamoto/" target="_blank" class="dossier-link primary">Trakx: Identity Analysis &rarr;</a>
                     <a href="https://news.bitcoin.com/the-search-for-satoshi-nakamoto-a-look-at-7-suspected-bitcoin-creators/" target="_blank" class="dossier-link">Bitcoin News: Suspects &rarr;</a>
+                    <a href="https://x.com/NickSzabo4" target="_blank" class="dossier-link x-link">[X] &rarr;</a>
                 </div>
             </div>
         </article>
@@ -759,6 +959,7 @@
                 <div class="dossier-links">
                     <a href="https://cryptonews.com/exclusives/hbo-satoshi-identity-reveal-6-people-who-might-be-the-bitcoin-founder/" target="_blank" class="dossier-link primary">CryptoNews: HBO Reveal &rarr;</a>
                     <a href="https://www.theblock.co/post/319927/getting-to-know-the-leading-candidates-to-be-named-as-bitcoin-creator-satoshi-nakamoto-by-hbo" target="_blank" class="dossier-link">The Block: Candidates &rarr;</a>
+                    <a href="https://x.com/peterktodd" target="_blank" class="dossier-link x-link">[X] &rarr;</a>
                 </div>
             </div>
         </article>
@@ -797,6 +998,7 @@
                     <a href="https://coinmarketcap.com/academy/article/satoshi-files-paul-le-roux" target="_blank" class="dossier-link primary">CoinMarketCap: Satoshi Files &rarr;</a>
                     <a href="https://news.bitcoin.com/the-many-facts-pointing-to-paul-le-roux-being-satoshi-nakamoto/" target="_blank" class="dossier-link">Bitcoin News: Evidence &rarr;</a>
                     <a href="https://www.ccn.com/news/technology/who-is-paul-le-roux-could-he-be-the-creator-of-bitcoin/" target="_blank" class="dossier-link">CCN: Profile &rarr;</a>
+                    <a href="https://www.amazon.com/s?k=The+Mastermind+Evan+Ratliff" target="_blank" class="dossier-link">Book: The Mastermind &rarr;</a>
                 </div>
             </div>
         </article>
@@ -832,6 +1034,7 @@
                 <div class="dossier-links">
                     <a href="https://trakx.io/resources/insights/what-is-the-identity-satoshi-nakamoto/" target="_blank" class="dossier-link primary">Trakx: Identity Deep Dive &rarr;</a>
                     <a href="https://www.ledger.com/academy/topics/crypto/who-is-satoshi-nakamoto" target="_blank" class="dossier-link">Ledger Academy &rarr;</a>
+                    <a href="https://x.com/weidai11" target="_blank" class="dossier-link x-link">[X] &rarr;</a>
                 </div>
             </div>
         </article>
@@ -916,6 +1119,7 @@
                 <div class="dossier-links">
                     <a href="https://news.bitcoin.com/the-search-for-satoshi-nakamoto-a-look-at-7-suspected-bitcoin-creators/" target="_blank" class="dossier-link primary">Bitcoin News: Full Story &rarr;</a>
                     <a href="https://www.ledger.com/academy/topics/crypto/who-is-satoshi-nakamoto" target="_blank" class="dossier-link">Ledger Academy &rarr;</a>
+                    <a href="https://x.com/DorianSatoshi" target="_blank" class="dossier-link x-link">[X] &rarr;</a>
                 </div>
             </div>
         </article>
@@ -952,6 +1156,8 @@
                 <div class="dossier-links">
                     <a href="https://www.gate.com/news/detail/18589809" target="_blank" class="dossier-link primary">Gate.io: 5 Suspects &rarr;</a>
                     <a href="https://trakx.io/resources/insights/what-is-the-identity-satoshi-nakamoto/" target="_blank" class="dossier-link">Trakx: Analysis &rarr;</a>
+                    <a href="https://www.amazon.com/s?k=Elon+Musk+Walter+Isaacson" target="_blank" class="dossier-link">Book: Elon Musk &rarr;</a>
+                    <a href="https://x.com/elonmusk" target="_blank" class="dossier-link x-link">[X] &rarr;</a>
                 </div>
             </div>
         </article>
@@ -986,6 +1192,7 @@
                 </div>
                 <div class="dossier-links">
                     <a href="https://news.bitcoin.com/the-search-for-satoshi-nakamoto-a-look-at-7-suspected-bitcoin-creators/" target="_blank" class="dossier-link primary">Bitcoin News: Suspects &rarr;</a>
+                    <a href="https://x.com/gavinandresen" target="_blank" class="dossier-link x-link">[X] &rarr;</a>
                 </div>
             </div>
         </article>
@@ -1035,10 +1242,25 @@
                     <a href="https://www.coindesk.com/policy/2024/03/14/craig-wright-not-satoshi-didnt-author-bitcoin-whitepaper-judge-rules/" target="_blank" class="dossier-link primary">CoinDesk: Court Ruling &rarr;</a>
                     <a href="https://www.judiciary.uk/wp-content/uploads/2024/07/COPA-v-Wright-Judgment.pdf" target="_blank" class="dossier-link">Full Court Judgment (PDF) &rarr;</a>
                     <a href="https://www.cbsnews.com/news/bitcoin-satoshi-nakamoto-australian-computer-scientist-british-high-court-ruling/" target="_blank" class="dossier-link">CBS News &rarr;</a>
+                    <a href="https://www.amazon.com/s?k=Satoshis+Vision+Art+Bitcoin+Craig+Wright" target="_blank" class="dossier-link">Book: Satoshi's Vision &rarr;</a>
+                    <a href="https://x.com/Dr_CSWright" target="_blank" class="dossier-link x-link">[X] &rarr;</a>
                 </div>
             </div>
         </article>
 
+    </div>
+</section>
+
+<!-- âââââââââââââââââââââââââââââââ VOTING SECTION âââââââââââââââââââââââââââââââ -->
+<section id="vote">
+    <div class="section-divider">
+        <div class="label">Intelligence Briefing</div>
+        <h2>Cast Your Vote</h2>
+        <p style="margin-top: 1rem; font-family: var(--typewriter); color: var(--manila); font-size: 1rem;">Who do you think is Satoshi?</p>
+    </div>
+
+    <div class="voting-grid" id="votingGrid">
+        <!-- Voting cards will be populated by JavaScript -->
     </div>
 </section>
 
@@ -1055,7 +1277,175 @@
         <a href="https://www.ledger.com/academy/topics/crypto/who-is-satoshi-nakamoto" target="_blank">Ledger</a> &middot;
         <a href="https://trakx.io/resources/insights/what-is-the-identity-satoshi-nakamoto/" target="_blank">Trakx</a>
     </p>
+    <div class="footer-books">
+        <div class="footer-books-title">Recommended Reading</div>
+        <div class="footer-books-links">
+            <a href="https://www.amazon.com/s?k=The+Book+Of+Satoshi+Phil+Champagne" target="_blank" class="book-link">The Book of Satoshi &rarr;</a>
+            <a href="https://www.amazon.com/s?k=Digital+Gold+Nathaniel+Popper" target="_blank" class="book-link">Digital Gold &rarr;</a>
+        </div>
+    </div>
 </footer>
+
+<!-- Firebase Scripts -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+
+<script>
+    // Firebase Configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyCBtP0ipZB0wh6vblAWxZiNqvg2dt7qCUk",
+        authDomain: "satoshi-files-voting.firebaseapp.com",
+        databaseURL: "https://satoshi-files-voting-default-rtdb.firebaseio.com",
+        projectId: "satoshi-files-voting",
+        storageBucket: "satoshi-files-voting.firebasestorage.app",
+        messagingSenderId: "344176057032",
+        appId: "1:344176057032:web:bbd461fa0acb01b981e3fd"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    // Suspects list
+    const suspects = [
+        { id: 'adam-back', name: 'Adam Back' },
+        { id: 'hal-finney', name: 'Hal Finney' },
+        { id: 'nick-szabo', name: 'Nick Szabo' },
+        { id: 'len-sassaman', name: 'Len Sassaman' },
+        { id: 'peter-todd', name: 'Peter Todd' },
+        { id: 'paul-le-roux', name: 'Paul Le Roux' },
+        { id: 'wei-dai', name: 'Wei Dai' },
+        { id: 'david-kleiman', name: 'David Kleiman' },
+        { id: 'dorian-nakamoto', name: 'Dorian Nakamoto' },
+        { id: 'elon-musk', name: 'Elon Musk' },
+        { id: 'gavin-andresen', name: 'Gavin Andresen' },
+        { id: 'craig-wright', name: 'Craig Wright' }
+    ];
+
+    // Voting data state
+    let votesData = {};
+    let userVoted = null;
+
+    // Check if user already voted
+    function checkUserVote() {
+        userVoted = localStorage.getItem('satoshi-voted');
+        return userVoted;
+    }
+
+    // Record user vote
+    function recordUserVote(suspectId) {
+        localStorage.setItem('satoshi-voted', suspectId);
+        userVoted = suspectId;
+    }
+
+    // Initialize voting grid
+    function initVotingGrid() {
+        const votingGrid = document.getElementById('votingGrid');
+        votingGrid.innerHTML = '';
+
+        suspects.forEach(suspect => {
+            const card = document.createElement('div');
+            card.className = 'voting-card';
+            card.id = `card-${suspect.id}`;
+
+            const isVoted = userVoted === suspect.id;
+            if (isVoted) {
+                card.classList.add('voted');
+            }
+
+            card.innerHTML = `
+                <h4>${suspect.name}</h4>
+                <button class="vote-button ${isVoted ? 'voted-btn' : ''}"
+                        data-suspect="${suspect.id}"
+                        ${isVoted ? 'disabled' : ''}>
+                    ${isVoted ? 'YOU VOTED' : 'CAST VOTE'}
+                </button>
+                <div class="vote-count" id="count-${suspect.id}">0</div>
+                <div class="vote-percentage" id="percent-${suspect.id}">0%</div>
+                <div class="vote-bar-bg">
+                    <div class="vote-bar-fill" id="bar-${suspect.id}"></div>
+                </div>
+                <div class="vote-status" id="status-${suspect.id}"></div>
+            `;
+
+            votingGrid.appendChild(card);
+        });
+
+        // Add vote button listeners
+        document.querySelectorAll('.vote-button').forEach(button => {
+            button.addEventListener('click', handleVote);
+        });
+    }
+
+    // Handle vote submission
+    function handleVote(e) {
+        const button = e.target;
+        const suspectId = button.dataset.suspect;
+
+        if (userVoted) {
+            alert('You have already cast your vote.');
+            return;
+        }
+
+        // Submit vote to Firebase
+        const votePath = `votes/${suspectId}`;
+        db.ref(votePath).once('value', snapshot => {
+            const currentVotes = snapshot.val() || 0;
+            db.ref(votePath).set(currentVotes + 1);
+
+            // Record user vote
+            recordUserVote(suspectId);
+
+            // Update UI
+            button.disabled = true;
+            button.textContent = 'YOU VOTED';
+            button.classList.add('voted-btn');
+
+            const card = document.getElementById(`card-${suspectId}`);
+            card.classList.add('voted');
+
+            const status = document.getElementById(`status-${suspectId}`);
+            status.textContent = 'VOTE RECORDED';
+            status.classList.add('show');
+        });
+    }
+
+    // Update vote displays
+    function updateVoteDisplays() {
+        const totalVotes = Object.values(votesData).reduce((a, b) => a + b, 0);
+
+        suspects.forEach(suspect => {
+            const votes = votesData[suspect.id] || 0;
+            const percentage = totalVotes > 0 ? Math.round((votes / totalVotes) * 100) : 0;
+
+            document.getElementById(`count-${suspect.id}`).textContent = votes;
+            document.getElementById(`percent-${suspect.id}`).textContent = percentage + '%';
+            document.getElementById(`bar-${suspect.id}`).style.width = percentage + '%';
+        });
+    }
+
+    // Initialize and listen to Firebase
+    function initFirebaseListener() {
+        db.ref('votes').on('value', snapshot => {
+            if (snapshot.exists()) {
+                votesData = snapshot.val();
+            } else {
+                votesData = {};
+                suspects.forEach(suspect => {
+                    votesData[suspect.id] = 0;
+                });
+            }
+            updateVoteDisplays();
+        });
+    }
+
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        checkUserVote();
+        initVotingGrid();
+        initFirebaseListener();
+    });
+</script>
 
 </body>
 </html>
