@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8"><!-- test -->
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Where in the World is Satoshi Nakamoto?</title>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%23111'/%3E%3Ctext x='32' y='44' font-size='36' text-anchor='middle' fill='%23e8c840'%3E%3F%3C/text%3E%3C/svg%3E">
@@ -186,34 +186,6 @@
             max-width: 600px;
             margin: 1.5rem auto 2.5rem;
             line-height: 1.8;
-        }
-
-        .hero-stats {
-            position: relative;
-            z-index: 2;
-            display: flex;
-            gap: 3rem;
-            margin-top: 1rem;
-        }
-
-        .hero-stat {
-            text-align: center;
-        }
-
-        .hero-stat-num {
-            font-family: var(--pixel);
-            font-size: 1.4rem;
-            color: var(--green-text);
-            text-shadow: 0 0 15px rgba(51,255,51,0.4);
-        }
-
-        .hero-stat-label {
-            font-family: var(--mono);
-            font-size: 0.65rem;
-            color: var(--grey);
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            margin-top: 0.3rem;
         }
 
         .hero-resources {
@@ -504,41 +476,14 @@
             pointer-events: none;
         }
 
-        /* ââ VOTING SECTION ââ */
-        .voting-grid {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .voting-card {
-            background: linear-gradient(135deg, #2a2a3e 0%, #1e1e30 100%);
-            border: 1px solid rgba(232,200,64,0.15);
-            border-left: 3px solid var(--red);
-            padding: 1.2rem;
-            text-align: center;
-            position: relative;
-            transition: transform 0.2s, border-color 0.2s;
-        }
-
-        .voting-card:hover {
-            transform: translateY(-2px);
-            border-color: rgba(232,200,64,0.4);
-        }
-
-        .voting-card.voted {
-            border-color: rgba(51,255,51,0.5);
-        }
-
-        .voting-card h4 {
-            font-family: var(--typewriter);
-            font-size: 1rem;
-            color: var(--white);
-            margin-bottom: 0.8rem;
-            line-height: 1.4;
+        /* ââ INLINE CARD VOTING ââ */
+        .card-vote {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px dashed rgba(232,200,64,0.15);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
         }
 
         .vote-button {
@@ -552,8 +497,7 @@
             padding: 0.5rem 0.8rem;
             cursor: pointer;
             transition: all 0.2s;
-            width: 100%;
-            margin-bottom: 0.8rem;
+            white-space: nowrap;
         }
 
         .vote-button:hover:not(:disabled) {
@@ -569,28 +513,29 @@
             cursor: not-allowed;
         }
 
-        .vote-count {
-            font-family: var(--pixel);
-            font-size: 1.1rem;
-            color: var(--yellow);
-            margin-bottom: 0.5rem;
-            text-shadow: 0 0 8px rgba(232,200,64,0.2);
+        .vote-info {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            flex: 1;
         }
 
-        .vote-percentage {
-            font-family: var(--mono);
-            font-size: 0.6rem;
-            color: var(--amber);
-            margin-bottom: 0.6rem;
+        .vote-count {
+            font-family: var(--pixel);
+            font-size: 0.7rem;
+            color: var(--yellow);
+            text-shadow: 0 0 8px rgba(232,200,64,0.2);
+            white-space: nowrap;
         }
 
         .vote-bar-bg {
             background: rgba(0,0,0,0.3);
             border: 1px solid rgba(232,200,64,0.2);
             height: 6px;
-            margin-bottom: 0.6rem;
+            flex: 1;
             position: relative;
             overflow: hidden;
+            min-width: 40px;
         }
 
         .vote-bar-fill {
@@ -600,15 +545,22 @@
             width: 0%;
         }
 
+        .vote-percentage {
+            font-family: var(--mono);
+            font-size: 0.6rem;
+            color: var(--amber);
+            white-space: nowrap;
+        }
+
         .vote-status {
             font-family: var(--pixel);
             font-size: 0.45rem;
             color: var(--green-text);
             letter-spacing: 0.1em;
             text-transform: uppercase;
-            margin-top: 0.6rem;
             opacity: 0;
             transition: opacity 0.2s;
+            white-space: nowrap;
         }
 
         .vote-status.show {
@@ -690,9 +642,8 @@
         /* ââ RESPONSIVE ââ */
         @media (max-width: 768px) {
             .nav-links { display: none; }
-            .hero-stats { flex-direction: column; gap: 1.5rem; }
             .dossier-grid { grid-template-columns: 1fr; padding: 1rem; }
-            .voting-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+            .card-vote { flex-wrap: wrap; }
             .hero-resources { gap: 0.5rem; }
         }
     </style>
@@ -707,7 +658,6 @@
         <li><a href="#notable">Notable Leads</a></li>
         <li><a href="#other">Other Suspects</a></li>
         <li><a href="#debunked">Debunked</a></li>
-        <li><a href="#vote">Vote</a></li>
     </ul>
 </nav>
 
@@ -722,20 +672,6 @@
         On October 31, 2008, a pseudonymous figure published a nine-page paper
         that would reshape global finance. Then they vanished. The case remains open.
     </p>
-    <div class="hero-stats">
-        <div class="hero-stat">
-            <div class="hero-stat-num">12</div>
-            <div class="hero-stat-label">Suspects</div>
-        </div>
-        <div class="hero-stat">
-            <div class="hero-stat-num">~1M</div>
-            <div class="hero-stat-label">BTC Mined</div>
-        </div>
-        <div class="hero-stat">
-            <div class="hero-stat-num">2011</div>
-            <div class="hero-stat-label">Last Contact</div>
-        </div>
-    </div>
     <div class="hero-resources">
         <a href="https://bitcoin.org/bitcoin.pdf" target="_blank" class="whitepaper-link">Whitepaper (Primary) &rarr;</a>
         <a href="https://nakamotoinstitute.org/library/bitcoin/" target="_blank" class="whitepaper-link">Whitepaper (Archive) &rarr;</a>
@@ -759,14 +695,13 @@
 <!-- âââââââââââââââââââââââââââââââ PRIME SUSPECTS âââââââââââââââââââââââââââââââ -->
 <section id="prime">
     <div class="section-divider">
-        <div class="label">Category A</div>
         <h2>Prime Suspects</h2>
     </div>
 
     <div class="dossier-grid">
 
         <!-- ADAM BACK -->
-        <article class="dossier">
+        <article class="dossier" data-suspect-id="adam-back">
             <span class="stamp">Classified</span>
             <div class="dossier-header">
                 <span class="dossier-number">Suspect #001</span>
@@ -806,7 +741,7 @@
         </article>
 
         <!-- HAL FINNEY -->
-        <article class="dossier">
+        <article class="dossier" data-suspect-id="hal-finney">
             <span class="stamp">Classified</span>
             <div class="dossier-header">
                 <span class="dossier-number">Suspect #002</span>
@@ -844,7 +779,7 @@
         </article>
 
         <!-- NICK SZABO -->
-        <article class="dossier">
+        <article class="dossier" data-suspect-id="nick-szabo">
             <span class="stamp">Classified</span>
             <div class="dossier-header">
                 <span class="dossier-number">Suspect #003</span>
@@ -881,7 +816,7 @@
         </article>
 
         <!-- LEN SASSAMAN -->
-        <article class="dossier">
+        <article class="dossier" data-suspect-id="len-sassaman">
             <span class="stamp">Classified</span>
             <div class="dossier-header">
                 <span class="dossier-number">Suspect #004</span>
@@ -923,14 +858,13 @@
 <!-- âââââââââââââââââââââââââââââââ NOTABLE LEADS âââââââââââââââââââââââââââââââ -->
 <section id="notable">
     <div class="section-divider">
-        <div class="label">Category B</div>
         <h2>Notable Leads</h2>
     </div>
 
     <div class="dossier-grid">
 
         <!-- PETER TODD -->
-        <article class="dossier">
+        <article class="dossier" data-suspect-id="peter-todd">
             <span class="stamp">Classified</span>
             <div class="dossier-header">
                 <span class="dossier-number">Suspect #005</span>
@@ -965,7 +899,7 @@
         </article>
 
         <!-- PAUL LE ROUX -->
-        <article class="dossier">
+        <article class="dossier" data-suspect-id="paul-le-roux">
             <span class="stamp">Classified</span>
             <div class="dossier-header">
                 <span class="dossier-number">Suspect #006</span>
@@ -1004,7 +938,7 @@
         </article>
 
         <!-- WEI DAI -->
-        <article class="dossier">
+        <article class="dossier" data-suspect-id="wei-dai">
             <span class="stamp">Classified</span>
             <div class="dossier-header">
                 <span class="dossier-number">Suspect #007</span>
@@ -1040,7 +974,7 @@
         </article>
 
         <!-- DAVID KLEIMAN -->
-        <article class="dossier">
+        <article class="dossier" data-suspect-id="david-kleiman">
             <span class="stamp">Classified</span>
             <div class="dossier-header">
                 <span class="dossier-number">Suspect #008</span>
@@ -1081,14 +1015,13 @@
 <!-- âââââââââââââââââââââââââââââââ OTHER SUSPECTS âââââââââââââââââââââââââââââââ -->
 <section id="other">
     <div class="section-divider">
-        <div class="label">Category C</div>
         <h2>Other Suspects</h2>
     </div>
 
     <div class="dossier-grid">
 
         <!-- DORIAN NAKAMOTO -->
-        <article class="dossier">
+        <article class="dossier" data-suspect-id="dorian-nakamoto">
             <span class="stamp">Classified</span>
             <div class="dossier-header">
                 <span class="dossier-number">Suspect #009</span>
@@ -1125,7 +1058,7 @@
         </article>
 
         <!-- ELON MUSK -->
-        <article class="dossier">
+        <article class="dossier" data-suspect-id="elon-musk">
             <span class="stamp">Classified</span>
             <div class="dossier-header">
                 <span class="dossier-number">Suspect #010</span>
@@ -1163,7 +1096,7 @@
         </article>
 
         <!-- GAVIN ANDRESEN -->
-        <article class="dossier">
+        <article class="dossier" data-suspect-id="gavin-andresen">
             <span class="stamp">Classified</span>
             <div class="dossier-header">
                 <span class="dossier-number">Suspect #011</span>
@@ -1203,14 +1136,13 @@
 <!-- âââââââââââââââââââââââââââââââ DEBUNKED âââââââââââââââââââââââââââââââ -->
 <section id="debunked">
     <div class="section-divider">
-        <div class="label">Case Closed</div>
         <h2>Debunked</h2>
     </div>
 
     <div class="dossier-grid">
 
         <!-- CRAIG WRIGHT -->
-        <article class="dossier">
+        <article class="dossier" data-suspect-id="craig-wright">
             <span class="stamp">DEBUNKED</span>
             <div class="dossier-header">
                 <span class="dossier-number">Suspect #012</span>
@@ -1251,18 +1183,6 @@
     </div>
 </section>
 
-<!-- âââââââââââââââââââââââââââââââ VOTING SECTION âââââââââââââââââââââââââââââââ -->
-<section id="vote">
-    <div class="section-divider">
-        <div class="label">Intelligence Briefing</div>
-        <h2>Cast Your Vote</h2>
-        <p style="margin-top: 1rem; font-family: var(--typewriter); color: var(--manila); font-size: 1rem;">Who do you think is Satoshi?</p>
-    </div>
-
-    <div class="voting-grid" id="votingGrid">
-        <!-- Voting cards will be populated by JavaScript -->
-    </div>
-</section>
 
 <!-- FOOTER -->
 <footer>
@@ -1306,22 +1226,6 @@
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
 
-    // Suspects list
-    const suspects = [
-        { id: 'adam-back', name: 'Adam Back' },
-        { id: 'hal-finney', name: 'Hal Finney' },
-        { id: 'nick-szabo', name: 'Nick Szabo' },
-        { id: 'len-sassaman', name: 'Len Sassaman' },
-        { id: 'peter-todd', name: 'Peter Todd' },
-        { id: 'paul-le-roux', name: 'Paul Le Roux' },
-        { id: 'wei-dai', name: 'Wei Dai' },
-        { id: 'david-kleiman', name: 'David Kleiman' },
-        { id: 'dorian-nakamoto', name: 'Dorian Nakamoto' },
-        { id: 'elon-musk', name: 'Elon Musk' },
-        { id: 'gavin-andresen', name: 'Gavin Andresen' },
-        { id: 'craig-wright', name: 'Craig Wright' }
-    ];
-
     // Voting data state
     let votesData = {};
     let userVoted = null;
@@ -1338,111 +1242,125 @@
         userVoted = suspectId;
     }
 
-    // Initialize voting grid
-    function initVotingGrid() {
-        const votingGrid = document.getElementById('votingGrid');
-        votingGrid.innerHTML = '';
+    // Inject vote widgets into each dossier card
+    function initInlineVoting() {
+        var cards = document.querySelectorAll('.dossier[data-suspect-id]');
+        cards.forEach(function(card) {
+            var suspectId = card.getAttribute('data-suspect-id');
+            var isVoted = userVoted === suspectId;
+            var hasVotedAny = !!userVoted;
 
-        suspects.forEach(suspect => {
-            const card = document.createElement('div');
-            card.className = 'voting-card';
-            card.id = `card-${suspect.id}`;
+            var voteDiv = document.createElement('div');
+            voteDiv.className = 'card-vote';
+            voteDiv.innerHTML =
+                '<button class="vote-button' + (isVoted ? ' voted-btn' : '') + '"' +
+                ' data-suspect="' + suspectId + '"' +
+                (hasVotedAny ? ' disabled' : '') + '>' +
+                (isVoted ? 'YOU VOTED' : 'CAST VOTE') +
+                '</button>' +
+                '<div class="vote-info">' +
+                '<div class="vote-count" id="count-' + suspectId + '">0</div>' +
+                '<div class="vote-bar-bg"><div class="vote-bar-fill" id="bar-' + suspectId + '"></div></div>' +
+                '<div class="vote-percentage" id="percent-' + suspectId + '">0%</div>' +
+                '</div>' +
+                '<div class="vote-status" id="status-' + suspectId + '"></div>';
 
-            const isVoted = userVoted === suspect.id;
-            if (isVoted) {
-                card.classList.add('voted');
-            }
-
-            card.innerHTML = `
-                <h4>${suspect.name}</h4>
-                <button class="vote-button ${isVoted ? 'voted-btn' : ''}"
-                        data-suspect="${suspect.id}"
-                        ${isVoted ? 'disabled' : ''}>
-                    ${isVoted ? 'YOU VOTED' : 'CAST VOTE'}
-                </button>
-                <div class="vote-count" id="count-${suspect.id}">0</div>
-                <div class="vote-percentage" id="percent-${suspect.id}">0%</div>
-                <div class="vote-bar-bg">
-                    <div class="vote-bar-fill" id="bar-${suspect.id}"></div>
-                </div>
-                <div class="vote-status" id="status-${suspect.id}"></div>
-            `;
-
-            votingGrid.appendChild(card);
+            var body = card.querySelector('.dossier-body');
+            body.appendChild(voteDiv);
         });
 
         // Add vote button listeners
-        document.querySelectorAll('.vote-button').forEach(button => {
+        document.querySelectorAll('.vote-button').forEach(function(button) {
             button.addEventListener('click', handleVote);
         });
     }
 
     // Handle vote submission
     function handleVote(e) {
-        const button = e.target;
-        const suspectId = button.dataset.suspect;
+        var button = e.target;
+        var suspectId = button.getAttribute('data-suspect');
 
         if (userVoted) {
-            alert('You have already cast your vote.');
             return;
         }
 
-        // Submit vote to Firebase
-        const votePath = `votes/${suspectId}`;
-        db.ref(votePath).once('value', snapshot => {
-            const currentVotes = snapshot.val() || 0;
-            db.ref(votePath).set(currentVotes + 1);
+        // Disable all buttons immediately to prevent double-voting
+        document.querySelectorAll('.vote-button').forEach(function(btn) {
+            btn.disabled = true;
+        });
 
-            // Record user vote
-            recordUserVote(suspectId);
+        // Use transaction for atomic increment
+        var votePath = 'votes/' + suspectId;
+        db.ref(votePath).transaction(function(current) {
+            return (current || 0) + 1;
+        }, function(error, committed) {
+            if (error) {
+                console.error('Vote failed:', error);
+                // Re-enable buttons on error
+                document.querySelectorAll('.vote-button').forEach(function(btn) {
+                    btn.disabled = false;
+                });
+                return;
+            }
+            if (committed) {
+                // Record user vote
+                recordUserVote(suspectId);
 
-            // Update UI
-            button.disabled = true;
-            button.textContent = 'YOU VOTED';
-            button.classList.add('voted-btn');
+                // Update voted button UI
+                button.textContent = 'YOU VOTED';
+                button.classList.add('voted-btn');
 
-            const card = document.getElementById(`card-${suspectId}`);
-            card.classList.add('voted');
-
-            const status = document.getElementById(`status-${suspectId}`);
-            status.textContent = 'VOTE RECORDED';
-            status.classList.add('show');
+                var status = document.getElementById('status-' + suspectId);
+                if (status) {
+                    status.textContent = 'VOTE RECORDED';
+                    status.classList.add('show');
+                }
+            }
         });
     }
 
     // Update vote displays
     function updateVoteDisplays() {
-        const totalVotes = Object.values(votesData).reduce((a, b) => a + b, 0);
+        var totalVotes = 0;
+        var keys = Object.keys(votesData);
+        for (var i = 0; i < keys.length; i++) {
+            totalVotes += votesData[keys[i]];
+        }
 
-        suspects.forEach(suspect => {
-            const votes = votesData[suspect.id] || 0;
-            const percentage = totalVotes > 0 ? Math.round((votes / totalVotes) * 100) : 0;
+        var cards = document.querySelectorAll('.dossier[data-suspect-id]');
+        cards.forEach(function(card) {
+            var suspectId = card.getAttribute('data-suspect-id');
+            var votes = votesData[suspectId] || 0;
+            var percentage = totalVotes > 0 ? Math.round((votes / totalVotes) * 100) : 0;
 
-            document.getElementById(`count-${suspect.id}`).textContent = votes;
-            document.getElementById(`percent-${suspect.id}`).textContent = percentage + '%';
-            document.getElementById(`bar-${suspect.id}`).style.width = percentage + '%';
+            var countEl = document.getElementById('count-' + suspectId);
+            var percentEl = document.getElementById('percent-' + suspectId);
+            var barEl = document.getElementById('bar-' + suspectId);
+
+            if (countEl) countEl.textContent = votes;
+            if (percentEl) percentEl.textContent = percentage + '%';
+            if (barEl) barEl.style.width = percentage + '%';
         });
     }
 
     // Initialize and listen to Firebase
     function initFirebaseListener() {
-        db.ref('votes').on('value', snapshot => {
+        db.ref('votes').on('value', function(snapshot) {
             if (snapshot.exists()) {
                 votesData = snapshot.val();
             } else {
                 votesData = {};
-                suspects.forEach(suspect => {
-                    votesData[suspect.id] = 0;
-                });
             }
             updateVoteDisplays();
+        }, function(error) {
+            console.error('Firebase read error:', error);
         });
     }
 
     // Initialize on page load
     document.addEventListener('DOMContentLoaded', function() {
         checkUserVote();
-        initVotingGrid();
+        initInlineVoting();
         initFirebaseListener();
     });
 </script>
