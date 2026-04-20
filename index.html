@@ -639,12 +639,167 @@
             text-shadow: 0 0 8px rgba(51,255,51,0.4);
         }
 
+        /* ââ CASSETTE PLAYER ââ */
+        .cassette-player {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            z-index: 1000;
+            cursor: pointer;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            transition: transform 0.15s;
+        }
+
+        .cassette-player:hover {
+            transform: scale(1.08);
+        }
+
+        .cassette-player:active {
+            transform: scale(0.96);
+        }
+
+        .cassette-body {
+            width: 120px;
+            height: 76px;
+            background: linear-gradient(180deg, #2a2a3e 0%, #1a1a2e 100%);
+            border: 2px solid var(--yellow);
+            border-radius: 6px;
+            position: relative;
+            box-shadow:
+                0 0 15px rgba(232,200,64,0.2),
+                inset 0 1px 0 rgba(255,255,255,0.05);
+            overflow: hidden;
+        }
+
+        .cassette-label {
+            position: absolute;
+            top: 4px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: var(--pixel);
+            font-size: 0.3rem;
+            color: var(--yellow);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            white-space: nowrap;
+            text-shadow: 0 0 6px rgba(232,200,64,0.4);
+        }
+
+        .cassette-window {
+            position: absolute;
+            top: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 72px;
+            height: 28px;
+            background: rgba(0,0,0,0.6);
+            border: 1px solid rgba(232,200,64,0.3);
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+        }
+
+        .cassette-reel {
+            width: 18px;
+            height: 18px;
+            border: 2px solid var(--red);
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .cassette-reel::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 6px;
+            height: 6px;
+            background: var(--red);
+            border-radius: 50%;
+        }
+
+        .cassette-player.playing .cassette-reel {
+            animation: spin-reel 1s linear infinite;
+        }
+
+        @keyframes spin-reel {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .cassette-status {
+            position: absolute;
+            bottom: 6px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: var(--pixel);
+            font-size: 0.28rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .cassette-player:not(.playing) .cassette-status {
+            color: var(--grey);
+        }
+
+        .cassette-player.playing .cassette-status {
+            color: var(--green-text);
+            text-shadow: 0 0 6px rgba(51,255,51,0.5);
+            animation: blink-status 1.2s ease-in-out infinite;
+        }
+
+        @keyframes blink-status {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .cassette-holes {
+            position: absolute;
+            bottom: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 28px;
+        }
+
+        .cassette-hole {
+            width: 8px;
+            height: 8px;
+            border: 1px solid rgba(232,200,64,0.2);
+            border-radius: 50%;
+        }
+
+        .cassette-player.playing .cassette-body {
+            border-color: var(--green-text);
+            box-shadow:
+                0 0 20px rgba(51,255,51,0.2),
+                inset 0 1px 0 rgba(255,255,255,0.05);
+        }
+
+        .cassette-player.playing .cassette-reel {
+            border-color: var(--green-text);
+        }
+
+        .cassette-player.playing .cassette-reel::after {
+            background: var(--green-text);
+        }
+
         /* ââ RESPONSIVE ââ */
         @media (max-width: 768px) {
             .nav-links { display: none; }
             .dossier-grid { grid-template-columns: 1fr; padding: 1rem; }
             .card-vote { flex-wrap: wrap; }
             .hero-resources { gap: 0.5rem; }
+            .cassette-player { bottom: 1rem; right: 1rem; }
+            .cassette-body { width: 100px; height: 64px; }
+            .cassette-window { top: 14px; width: 60px; height: 24px; }
+            .cassette-reel { width: 14px; height: 14px; }
+            .cassette-reel::after { width: 4px; height: 4px; }
         }
     </style>
 </head>
@@ -1206,6 +1361,22 @@
     </div>
 </footer>
 
+<!-- CASSETTE PLAYER -->
+<div class="cassette-player" id="cassettePlayer" title="Click to play 8-bit music" onclick="toggleMusic()">
+    <div class="cassette-body">
+        <div class="cassette-label">SATOSHI FILES OST</div>
+        <div class="cassette-window">
+            <div class="cassette-reel"></div>
+            <div class="cassette-reel"></div>
+        </div>
+        <div class="cassette-holes">
+            <div class="cassette-hole"></div>
+            <div class="cassette-hole"></div>
+        </div>
+        <div class="cassette-status" id="cassetteStatus">&#9654; PLAY</div>
+    </div>
+</div>
+
 <!-- Firebase Scripts -->
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
@@ -1363,6 +1534,245 @@
         initInlineVoting();
         initFirebaseListener();
     });
+</script>
+
+<script>
+// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// 8-BIT CHIPTUNE ENGINE â "Mystery of Satoshi" theme
+// Pure Web Audio API â no external files needed
+// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+
+var audioCtx = null;
+var isPlaying = false;
+var masterGain = null;
+var schedulerTimer = null;
+var currentStep = 0;
+var nextNoteTime = 0;
+var tempo = 140; // BPM
+var stepDuration; // set when audioCtx is created
+var activeOscillators = [];
+
+// Note frequency table
+var NOTE = {
+    'C2':65.41,'D2':73.42,'E2':82.41,'F2':87.31,'G2':98.00,'A2':110.00,'Bb2':116.54,'B2':123.47,
+    'C3':130.81,'D3':146.83,'Eb3':155.56,'E3':164.81,'F3':174.61,'G3':196.00,'Ab3':207.65,'A3':220.00,'Bb3':233.08,'B3':246.94,
+    'C4':261.63,'D4':293.66,'Eb4':311.13,'E4':329.63,'F4':349.23,'G4':392.00,'Ab4':415.30,'A4':440.00,'Bb4':466.16,'B4':493.88,
+    'C5':523.25,'D5':587.33,'Eb5':622.25,'E5':659.26,'F5':698.46,'G5':783.99,'Ab5':830.61,'A5':880.00,'Bb5':932.33,'B5':987.77,
+    'C6':1046.50,'D6':1174.66,'Eb6':1244.51
+};
+
+// Mystery detective melody in C minor â 32 steps (2 bars of 16th notes at 140bpm)
+// Each step = 1 sixteenth note
+var melodyPattern = [
+    // Bar 1: Rising minor arpeggio with suspenseful feel
+    'C5','Eb5',null,'G5', 'Ab5',null,'G5',null, 'Eb5','D5',null,'C5', 'D5',null,null,null,
+    // Bar 2: Descending response phrase
+    'G5','F5',null,'Eb5', 'D5',null,'C5',null, 'Eb5',null,'D5','C5', 'G4',null,null,null,
+    // Bar 3: Tension building
+    'Ab4','Bb4',null,'C5', 'Eb5',null,'D5',null, 'C5','Bb4',null,'Ab4', 'G4',null,null,null,
+    // Bar 4: Resolution with mystery
+    'C5','D5',null,'Eb5', 'G5',null,'Ab5','G5', 'Eb5',null,'D5',null, 'C5',null,null,null
+];
+
+// Bass line â half notes basically
+var bassPattern = [
+    'C2',null,null,null, null,null,null,null, 'Ab2',null,null,null, null,null,null,null,
+    'Eb2',null,null,null, null,null,null,null, 'G2',null,null,null, null,null,null,null,
+    'F2',null,null,null, null,null,null,null, 'Ab2',null,null,null, null,null,null,null,
+    'Eb2',null,null,null, null,null,null,null, 'C2',null,null,null, null,null,null,null
+];
+
+// Arpeggio pattern â rapid 8-bit arpeggios
+var arpPattern = [
+    'C4','Eb4','G4','C4', 'Eb4','G4','C4','Eb4', 'Ab3','C4','Eb4','Ab3', 'C4','Eb4','Ab3','C4',
+    'Eb3','G3','Bb3','Eb3', 'G3','Bb3','Eb3','G3', 'G3','B3','D4','G3', 'B3','D4','G3','B3',
+    'F3','Ab3','C4','F3', 'Ab3','C4','F3','Ab3', 'Ab3','C4','Eb4','Ab3', 'C4','Eb4','Ab3','C4',
+    'Eb3','G3','Bb3','Eb3', 'G3','Bb3','Eb3','G3', 'C3','Eb3','G3','C3', 'Eb3','G3','C3','Eb3'
+];
+
+function initAudio() {
+    if (audioCtx) return;
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    stepDuration = 60 / tempo / 4; // 16th note duration
+
+    masterGain = audioCtx.createGain();
+    masterGain.gain.value = 0.25;
+    masterGain.connect(audioCtx.destination);
+}
+
+function playSquareNote(freq, time, duration, volume, detune) {
+    var osc = audioCtx.createOscillator();
+    var gain = audioCtx.createGain();
+
+    osc.type = 'square';
+    osc.frequency.value = freq;
+    if (detune) osc.detune.value = detune;
+
+    gain.gain.setValueAtTime(0, time);
+    gain.gain.linearRampToValueAtTime(volume, time + 0.005);
+    gain.gain.setValueAtTime(volume, time + duration * 0.7);
+    gain.gain.linearRampToValueAtTime(0, time + duration * 0.95);
+
+    osc.connect(gain);
+    gain.connect(masterGain);
+
+    osc.start(time);
+    osc.stop(time + duration);
+    activeOscillators.push(osc);
+    osc.onended = function() {
+        var idx = activeOscillators.indexOf(osc);
+        if (idx > -1) activeOscillators.splice(idx, 1);
+    };
+}
+
+function playTriangleNote(freq, time, duration, volume) {
+    var osc = audioCtx.createOscillator();
+    var gain = audioCtx.createGain();
+
+    osc.type = 'triangle';
+    osc.frequency.value = freq;
+
+    gain.gain.setValueAtTime(volume, time);
+    gain.gain.setValueAtTime(volume, time + duration * 0.8);
+    gain.gain.linearRampToValueAtTime(0, time + duration);
+
+    osc.connect(gain);
+    gain.connect(masterGain);
+
+    osc.start(time);
+    osc.stop(time + duration);
+    activeOscillators.push(osc);
+    osc.onended = function() {
+        var idx = activeOscillators.indexOf(osc);
+        if (idx > -1) activeOscillators.splice(idx, 1);
+    };
+}
+
+function playNoiseHit(time, duration) {
+    var bufferSize = audioCtx.sampleRate * duration;
+    var buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+    var data = buffer.getChannelData(0);
+    for (var i = 0; i < bufferSize; i++) {
+        data[i] = Math.random() * 2 - 1;
+    }
+
+    var noise = audioCtx.createBufferSource();
+    noise.buffer = buffer;
+
+    var filter = audioCtx.createBiquadFilter();
+    filter.type = 'highpass';
+    filter.frequency.value = 8000;
+
+    var gain = audioCtx.createGain();
+    gain.gain.setValueAtTime(0.06, time);
+    gain.gain.linearRampToValueAtTime(0, time + duration);
+
+    noise.connect(filter);
+    filter.connect(gain);
+    gain.connect(masterGain);
+
+    noise.start(time);
+    noise.stop(time + duration);
+}
+
+function scheduleStep(step, time) {
+    var melodyIdx = step % melodyPattern.length;
+    var bassIdx = step % bassPattern.length;
+    var arpIdx = step % arpPattern.length;
+
+    // Lead melody â square wave
+    var melodyNote = melodyPattern[melodyIdx];
+    if (melodyNote && NOTE[melodyNote]) {
+        playSquareNote(NOTE[melodyNote], time, stepDuration * 0.85, 0.12, 5);
+    }
+
+    // Bass â triangle wave
+    var bassNote = bassPattern[bassIdx];
+    if (bassNote && NOTE[bassNote]) {
+        playTriangleNote(NOTE[bassNote], time, stepDuration * 3.5, 0.18);
+    }
+
+    // Arpeggio â quiet square wave
+    var arpNote = arpPattern[arpIdx];
+    if (arpNote && NOTE[arpNote]) {
+        playSquareNote(NOTE[arpNote], time, stepDuration * 0.4, 0.04, -5);
+    }
+
+    // Hi-hat on every 4th step
+    if (step % 4 === 0) {
+        playNoiseHit(time, 0.05);
+    }
+
+    // Kick-like thump on beats 1 and 3
+    if (step % 16 === 0 || step % 16 === 8) {
+        var kickOsc = audioCtx.createOscillator();
+        var kickGain = audioCtx.createGain();
+        kickOsc.type = 'sine';
+        kickOsc.frequency.setValueAtTime(150, time);
+        kickOsc.frequency.exponentialRampToValueAtTime(40, time + 0.1);
+        kickGain.gain.setValueAtTime(0.2, time);
+        kickGain.gain.linearRampToValueAtTime(0, time + 0.12);
+        kickOsc.connect(kickGain);
+        kickGain.connect(masterGain);
+        kickOsc.start(time);
+        kickOsc.stop(time + 0.15);
+    }
+}
+
+function scheduler() {
+    while (nextNoteTime < audioCtx.currentTime + 0.1) {
+        scheduleStep(currentStep, nextNoteTime);
+        nextNoteTime += stepDuration;
+        currentStep++;
+    }
+}
+
+function toggleMusic() {
+    initAudio();
+
+    var player = document.getElementById('cassettePlayer');
+    var status = document.getElementById('cassetteStatus');
+
+    if (isPlaying) {
+        // Stop
+        isPlaying = false;
+        clearInterval(schedulerTimer);
+        schedulerTimer = null;
+
+        // Fade out
+        if (masterGain) {
+            masterGain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.3);
+        }
+
+        // Stop all active oscillators after fade
+        setTimeout(function() {
+            activeOscillators.forEach(function(osc) {
+                try { osc.stop(); } catch(e) {}
+            });
+            activeOscillators = [];
+            if (masterGain) masterGain.gain.value = 0.25;
+        }, 350);
+
+        player.classList.remove('playing');
+        status.innerHTML = '&#9654; PLAY';
+    } else {
+        // Start
+        isPlaying = true;
+
+        if (audioCtx.state === 'suspended') {
+            audioCtx.resume();
+        }
+
+        masterGain.gain.value = 0.25;
+        currentStep = 0;
+        nextNoteTime = audioCtx.currentTime + 0.05;
+
+        schedulerTimer = setInterval(scheduler, 25);
+
+        player.classList.add('playing');
+        status.innerHTML = '&#9646;&#9646; STOP';
+    }
+}
 </script>
 
 </body>
