@@ -353,6 +353,68 @@
             border: 1px solid rgba(51,255,51,0.3);
         }
 
+        .dossier-photo {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+            background: #1a1a28;
+            border-bottom: 1px solid rgba(232,200,64,0.1);
+        }
+
+        .dossier-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+            filter: grayscale(60%) contrast(1.1) brightness(0.9);
+            transition: filter 0.3s;
+        }
+
+        .dossier:hover .dossier-photo img {
+            filter: grayscale(30%) contrast(1.05) brightness(0.95);
+        }
+
+        .dossier-photo .photo-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #1a1a28 0%, #252538 50%, #1a1a28 100%);
+            position: relative;
+        }
+
+        .dossier-photo .photo-placeholder::before {
+            content: '';
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: rgba(232,200,64,0.06);
+            border: 2px dashed rgba(232,200,64,0.15);
+        }
+
+        .dossier-photo .photo-placeholder::after {
+            content: attr(data-initials);
+            position: absolute;
+            font-family: var(--pixel);
+            font-size: 1.2rem;
+            color: rgba(232,200,64,0.25);
+            letter-spacing: 0.1em;
+        }
+
+        .dossier-photo .photo-stamp {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            font-family: var(--pixel);
+            font-size: 0.4rem;
+            color: rgba(232,200,64,0.4);
+            background: rgba(10,10,20,0.7);
+            padding: 3px 6px;
+            letter-spacing: 0.1em;
+        }
+
         .dossier-body {
             padding: 1.25rem;
         }
@@ -862,6 +924,10 @@
                 <span class="dossier-number">Suspect #001</span>
                 <span class="dossier-status status-prime">Prime Suspect</span>
             </div>
+            <div class="dossier-photo">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Portrait_Adam_Back_photographe_Alexandre_Sitter.webp/330px-Portrait_Adam_Back_photographe_Alexandre_Sitter.webp.png" alt="Adam Back" loading="lazy">
+                <span class="photo-stamp">FILE PHOTO</span>
+            </div>
             <div class="dossier-body">
                 <h3>Adam Back</h3>
                 <div class="dossier-subtitle">British Cryptographer &amp; CEO of Blockstream</div>
@@ -902,6 +968,10 @@
                 <span class="dossier-number">Suspect #002</span>
                 <span class="dossier-status status-deceased">Deceased 2014</span>
             </div>
+            <div class="dossier-photo">
+                <img src="https://upload.wikimedia.org/wikipedia/en/5/52/Hal_Finney_%28computer_scientist%29.jpg" alt="Hal Finney" loading="lazy">
+                <span class="photo-stamp">FILE PHOTO</span>
+            </div>
             <div class="dossier-body">
                 <h3>Hal Finney</h3>
                 <div class="dossier-subtitle">Cryptographer &amp; First Bitcoin Recipient</div>
@@ -940,6 +1010,10 @@
                 <span class="dossier-number">Suspect #003</span>
                 <span class="dossier-status status-prime">Prime Suspect</span>
             </div>
+            <div class="dossier-photo">
+                <div class="photo-placeholder" data-initials="NS"></div>
+                <span class="photo-stamp">NO PHOTO ON FILE</span>
+            </div>
             <div class="dossier-body">
                 <h3>Nick Szabo</h3>
                 <div class="dossier-subtitle">Computer Scientist &amp; Creator of Bit Gold</div>
@@ -976,6 +1050,10 @@
             <div class="dossier-header">
                 <span class="dossier-number">Suspect #004</span>
                 <span class="dossier-status status-deceased">Deceased 2011</span>
+            </div>
+            <div class="dossier-photo">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Len_Sassaman_27C3.jpg/330px-Len_Sassaman_27C3.jpg" alt="Len Sassaman" loading="lazy">
+                <span class="photo-stamp">FILE PHOTO</span>
             </div>
             <div class="dossier-body">
                 <h3>Len Sassaman</h3>
@@ -1025,6 +1103,10 @@
                 <span class="dossier-number">Suspect #005</span>
                 <span class="dossier-status status-denied">Denied</span>
             </div>
+            <div class="dossier-photo">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Peter_Todd_-_2016.jpg/330px-Peter_Todd_-_2016.jpg" alt="Peter Todd" loading="lazy">
+                <span class="photo-stamp">FILE PHOTO</span>
+            </div>
             <div class="dossier-body">
                 <h3>Peter Todd</h3>
                 <div class="dossier-subtitle">Bitcoin Core Developer</div>
@@ -1059,6 +1141,10 @@
             <div class="dossier-header">
                 <span class="dossier-number">Suspect #006</span>
                 <span class="dossier-status status-unverified">Unverified</span>
+            </div>
+            <div class="dossier-photo">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/66/Paul_Le_Roux_being_escorted_by_DEA_agents_2_%28cropped%29.png" alt="Paul Le Roux" loading="lazy">
+                <span class="photo-stamp">DEA ARREST PHOTO</span>
             </div>
             <div class="dossier-body">
                 <h3>Paul Le Roux</h3>
@@ -1099,6 +1185,10 @@
                 <span class="dossier-number">Suspect #007</span>
                 <span class="dossier-status status-unverified">Unverified</span>
             </div>
+            <div class="dossier-photo">
+                <div class="photo-placeholder" data-initials="WD"></div>
+                <span class="photo-stamp">NO PHOTO ON FILE</span>
+            </div>
             <div class="dossier-body">
                 <h3>Wei Dai</h3>
                 <div class="dossier-subtitle">Cryptographer &amp; Creator of b-money</div>
@@ -1134,6 +1224,10 @@
             <div class="dossier-header">
                 <span class="dossier-number">Suspect #008</span>
                 <span class="dossier-status status-deceased">Deceased 2013</span>
+            </div>
+            <div class="dossier-photo">
+                <img src="https://upload.wikimedia.org/wikipedia/en/f/f2/Dave_Kleiman_website_photo.jpg" alt="David Kleiman" loading="lazy">
+                <span class="photo-stamp">FILE PHOTO</span>
             </div>
             <div class="dossier-body">
                 <h3>David Kleiman</h3>
@@ -1182,6 +1276,10 @@
                 <span class="dossier-number">Suspect #009</span>
                 <span class="dossier-status status-denied">Denied</span>
             </div>
+            <div class="dossier-photo">
+                <div class="photo-placeholder" data-initials="DN"></div>
+                <span class="photo-stamp">PHOTO REDACTED</span>
+            </div>
             <div class="dossier-body">
                 <h3>Dorian Nakamoto</h3>
                 <div class="dossier-subtitle">Japanese-American Physicist &amp; Engineer</div>
@@ -1218,6 +1316,10 @@
             <div class="dossier-header">
                 <span class="dossier-number">Suspect #010</span>
                 <span class="dossier-status status-denied">Denied</span>
+            </div>
+            <div class="dossier-photo">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Elon_Musk_-_54820081119_%28cropped%29.jpg/330px-Elon_Musk_-_54820081119_%28cropped%29.jpg" alt="Elon Musk" loading="lazy">
+                <span class="photo-stamp">FILE PHOTO</span>
             </div>
             <div class="dossier-body">
                 <h3>Elon Musk</h3>
@@ -1256,6 +1358,10 @@
             <div class="dossier-header">
                 <span class="dossier-number">Suspect #011</span>
                 <span class="dossier-status status-unverified">Unverified</span>
+            </div>
+            <div class="dossier-photo">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Gavin_Andresen_at_2014_Web_Summit.jpg/330px-Gavin_Andresen_at_2014_Web_Summit.jpg" alt="Gavin Andresen" loading="lazy">
+                <span class="photo-stamp">FILE PHOTO</span>
             </div>
             <div class="dossier-body">
                 <h3>Gavin Andresen</h3>
@@ -1302,6 +1408,10 @@
             <div class="dossier-header">
                 <span class="dossier-number">Suspect #012</span>
                 <span class="dossier-status status-debunked">Court-Ruled Not Satoshi</span>
+            </div>
+            <div class="dossier-photo">
+                <div class="photo-placeholder" data-initials="CW"></div>
+                <span class="photo-stamp">NO PHOTO ON FILE</span>
             </div>
             <div class="dossier-body">
                 <h3>Craig Wright</h3>
@@ -1362,7 +1472,7 @@
 </footer>
 
 <!-- CASSETTE PLAYER -->
-<div class="cassette-player" id="cassettePlayer" title="Click to play 8-bit music" onclick="toggleMusic()">
+<div class="cassette-player" id="cassettePlayer" title="Click to play 8-bit music" onclick="toggleMusic()" ontouchend="event.preventDefault(); toggleMusic()">
     <div class="cassette-body">
         <div class="cassette-label">SATOSHI FILES OST</div>
         <div class="cassette-window">
@@ -1598,6 +1708,13 @@ function initAudio() {
     masterGain = audioCtx.createGain();
     masterGain.gain.value = 0.25;
     masterGain.connect(audioCtx.destination);
+
+    // iOS Safari unlock: play a silent buffer to enable audio output
+    var silentBuf = audioCtx.createBuffer(1, 1, audioCtx.sampleRate);
+    var silentSrc = audioCtx.createBufferSource();
+    silentSrc.buffer = silentBuf;
+    silentSrc.connect(audioCtx.destination);
+    silentSrc.start(0);
 }
 
 function playSquareNote(freq, time, duration, volume, detune) {
@@ -1727,6 +1844,20 @@ function scheduler() {
     }
 }
 
+function startPlayback() {
+    var player = document.getElementById('cassettePlayer');
+    var status = document.getElementById('cassetteStatus');
+
+    masterGain.gain.value = 0.25;
+    currentStep = 0;
+    nextNoteTime = audioCtx.currentTime + 0.05;
+
+    schedulerTimer = setInterval(scheduler, 25);
+
+    player.classList.add('playing');
+    status.innerHTML = '&#9646;&#9646; STOP';
+}
+
 function toggleMusic() {
     initAudio();
 
@@ -1759,18 +1890,14 @@ function toggleMusic() {
         // Start
         isPlaying = true;
 
+        // iOS Safari requires resume() from a user gesture â wait for it to resolve
         if (audioCtx.state === 'suspended') {
-            audioCtx.resume();
+            audioCtx.resume().then(function() {
+                startPlayback();
+            });
+        } else {
+            startPlayback();
         }
-
-        masterGain.gain.value = 0.25;
-        currentStep = 0;
-        nextNoteTime = audioCtx.currentTime + 0.05;
-
-        schedulerTimer = setInterval(scheduler, 25);
-
-        player.classList.add('playing');
-        status.innerHTML = '&#9646;&#9646; STOP';
     }
 }
 </script>
